@@ -1,12 +1,13 @@
 FROM nvidia/cuda:9.0-cudnn7-devel
 LABEL maintainer="4@jach.vip"
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 #  update
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
 # ssh and other softwares
+RUN apt-get install -y libfontconfig1 libxrender1
 RUN apt-get install -y htop tmux vim
 RUN apt-get install -y openssh-server
 RUN apt-get install -y checkinstall openmpi-bin openmpi-doc libopenmpi-dev
@@ -29,8 +30,6 @@ RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main 
 # root password
 RUN echo "root:woshiroot" | chpasswd
 
-# libxrender
-RUN apt-get install -y libfontconfig1 libxrender1
 
 
 
@@ -52,8 +51,8 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86
 RUN echo "export PATH=\"\$PATH:/opt/conda/bin\"" >> /etc/bash.bashrc
 
 # nccl
-RUN wget --quiet https://od.lk/d/MzdfMjQzODc4N18/nccl-repo-ubuntu1604-2.3.7-ga-cuda10.0_1-1_amd64.deb -O ~/nccl.deb \
-    && dpkg -i ~/nccl.deb
+# RUN wget --quiet https://od.lk/d/MzdfMjQzODc4N18/nccl-repo-ubuntu1604-2.3.7-ga-cuda10.0_1-1_amd64.deb -O ~/nccl.deb \
+#     && dpkg -i ~/nccl.deb
 
 #cuda
 RUN echo "export CUDA_HOME=\"/usr/local/cuda-9.0/\"" >> /etc/bash.bashrc
