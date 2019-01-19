@@ -1,6 +1,6 @@
 FROM nvidia/cuda:9.0-cudnn7-devel
 LABEL maintainer="4@jach.vip"
-LABEL version="1.0.0"
+LABEL version="1.0.1"
 
 #  update
 RUN apt-get -y update
@@ -29,8 +29,8 @@ RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main 
 # root password
 RUN echo "root:woshiroot" | chpasswd
 
-# # libxrender
-# RUN apt-get install -y libfontconfig1 libxrender1
+# libxrender
+RUN apt-get install -y libfontconfig1 libxrender1
 
 
 
